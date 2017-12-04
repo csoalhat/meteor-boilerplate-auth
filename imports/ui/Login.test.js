@@ -6,7 +6,12 @@ import { configure, shallow, mount, render } from 'enzyme';
 import { Login } from './Login';
 
 configure({ adapter: new Adapter() });
-var expect = require('chai').expect;
+
+var chai = require('chai')
+  , spies = require('chai-spies');
+chai.use(spies);
+var should = chai.should()
+  , expect = chai.expect;
 
 if (Meteor.isClient) {
   describe('Login header', function() {
@@ -21,12 +26,20 @@ if (Meteor.isClient) {
       expect(wrapper.find('p').length).to.equal(0);
     });
 
-    it('should call handleLogout on click', function () {
+    it('should call loginWithPassword with form data', function () {
+      const email = 'test@test.com';
+      const password = 'test123';
+
+      const spy = chai.spy();
         // let spy = sinon.spy();
         // //  const spy = expect.createSpy();
         // const wrapper = mount( <PrivateHeader title="Title" handleLogout={spy}/> );
         // wrapper.find('button').simulate('click');
         // expect(spy).toHaveBeenCalled();
-      });
+    });
+
+    it('should set loginWithPassword callback errors', function () {
+
+    });
   });
 }

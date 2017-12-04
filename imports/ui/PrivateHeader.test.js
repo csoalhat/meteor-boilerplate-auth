@@ -6,7 +6,12 @@ import { configure, shallow, mount, render } from 'enzyme';
 import { PrivateHeader } from './PrivateHeader';
 
 configure({ adapter: new Adapter() });
-var expect = require('chai').expect;
+
+const chai = require('chai')
+  , spies = require('chai-spies');
+chai.use(spies);
+const should = chai.should()
+  , expect = chai.expect;
 
 if (Meteor.isClient) {
   describe('Private header', function() {
@@ -19,11 +24,11 @@ if (Meteor.isClient) {
     });
 
     it('should call handleLogout on click', function () {
-        // let spy = sinon.spy();
-        // //  const spy = expect.createSpy();
-        // const wrapper = shallow( <PrivateHeader title="Title" handleLogout={spy}/> );
-        // wrapper.find('button').simulate('click');
-        // expect(spy).toHaveBeenCalled();
+      const spy = chai.spy();
+      const wrapper = mount ( <PrivateHeader title="Title" handleLogout={spy}/> );
+      wrapper.find('button').simulate('click');
+
+      expect(spy).to.have.been.called(); 
       });
   });
 }
