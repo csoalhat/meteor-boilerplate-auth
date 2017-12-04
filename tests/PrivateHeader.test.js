@@ -3,7 +3,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow, mount, render } from 'enzyme';
 
-import { PrivateHeader } from './PrivateHeader';
+import { PrivateHeader } from './../../imports/ui/PrivateHeader';
 
 configure({ adapter: new Adapter() });
 
@@ -23,12 +23,12 @@ if (Meteor.isClient) {
       expect(h1Title).to.equal(title);
     });
 
-    it('should call handleLogout on click', function () {
+    it('it should call handleLogout on click', function () {
       const spy = chai.spy();
       const wrapper = mount ( <PrivateHeader title="Title" handleLogout={spy}/> );
       wrapper.find('button').simulate('click');
 
-      expect(spy).to.have.been.called(); 
+      expect(spy).to.have.been.called();
       });
   });
 }

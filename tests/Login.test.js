@@ -3,7 +3,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow, mount, render } from 'enzyme';
 
-import { Login } from './Login';
+import { Login } from './../imports/ui/Login';
 
 configure({ adapter: new Adapter() });
 
@@ -27,15 +27,11 @@ if (Meteor.isClient) {
     });
 
     it('should call loginWithPassword with form data', function () {
-      const email = 'test@test.com';
-      const password = 'test123';
-
-      const spy = chai.spy();
-        // let spy = sinon.spy();
-        // //  const spy = expect.createSpy();
-        // const wrapper = mount( <PrivateHeader title="Title" handleLogout={spy}/> );
-        // wrapper.find('button').simulate('click');
-        // expect(spy).toHaveBeenCalled();
+      // const email = 'test@test.com';
+      // const password = 'test123';
+      //
+      // const spy = chai.spy();
+      // const wrapper = shallow( <Login loginWithPassword={spy}/> );
     });
 
     it('should set loginWithPassword callback errors', function () {

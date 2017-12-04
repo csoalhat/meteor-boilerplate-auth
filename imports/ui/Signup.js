@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class SignUp extends React.Component {
+export class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    //calls super and repasses the props not to lose them because we override the constructor
-    // state is imnternal to component
     this.state = {
       error: ''
     };
@@ -22,7 +22,7 @@ export default class SignUp extends React.Component {
       return this.setState({error: 'Password must be more than 4 characters'})
     }
 
-    Accounts.createUser({email, password}, (err) => {
+    this.props.createUser({email, password}, (err) => {
       if (err) {
         this.setState({error: err.reason});
       } else {
@@ -50,3 +50,13 @@ export default class SignUp extends React.Component {
     )
   }
 }
+
+SignUp.propTypes = {
+  createUser: PropTypes.func.isRequired
+};
+
+export default withTracker(() => {
+  return {
+    createUser: Accounts.createUser
+  };
+})(SignUp);
